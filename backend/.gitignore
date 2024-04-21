@@ -1,0 +1,8 @@
+#dependecncies
+
+node_modules
+pacakge-lock.json
+
+#env
+
+.env
