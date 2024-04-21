@@ -1,4 +1,5 @@
 const express = require("express");
+const { connectionToDb } = require("./config/dbConfig");
 const cors = require("cors");
 
 
@@ -12,6 +13,7 @@ app.get("/",(req,res)=>{
 
 
 app.listen(8080, async()=> {
+    await connectionToDb();
     console.log("Server is running at port number 8080")
 })
 
