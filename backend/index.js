@@ -1,6 +1,8 @@
 const express = require("express");
 const { connectionToDb } = require("./config/dbConfig");
 const cors = require("cors");
+const { userRouter } = require("./routes/user.route");
+const { vehicleRouter } = require("./routes/user.vehicle");
 
 
 const app = express();
@@ -10,6 +12,9 @@ app.use(express.json());
 app.get("/",(req,res)=>{
     res.send("Server is running");
 })
+
+app.use("/users",userRouter);
+app.use("/vehicles",vehicleRouter);
 
 
 app.listen(8080, async()=> {

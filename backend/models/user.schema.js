@@ -9,9 +9,13 @@ const userSchema = sequelize.define('user',{
     model: {type : DataTypes.STRING, allowNull : false},
     startDate:{type : DataTypes.DATE, allowNull : false},
     endDate: {type : DataTypes.DATE, allowNull : false},
-    bookingId: {
-        type: {type : DataTypes.STRING, allowNull : false},
-    },
+    bookingId: { 
+        type : DataTypes.INTEGER, 
+        references: {
+            model: "vehicles",
+            key: "id",
+        }
+     },
 },{
     timestamps : false
 })
