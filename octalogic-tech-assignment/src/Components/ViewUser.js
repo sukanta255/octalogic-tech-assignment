@@ -11,8 +11,7 @@ function ViewUser(){
     }, []);
 
     const handleDelete = (id) => {
-        // axios.delete(`https://sukanta-octalogic-backen.onrender.com/users/${id}`)
-        axios.delete(`http://localhost:8080/users/delete/${id}`)
+        axios.delete(`https://sukanta-octa-backendd.onrender.com/users/delete/${id}`)
             .then(() => {
                 fetchData();
             })
@@ -22,8 +21,7 @@ function ViewUser(){
     };
 
     const fetchData = () => {
-        // axios.get("https://sukanta-octalogic-backen.onrender.com/users")     
-        axios.get("http://localhost:8080/users")  
+        axios.get("https://sukanta-octa-backendd.onrender.com/users")     
             .then((res) => {
                 setData(res.data);
             })

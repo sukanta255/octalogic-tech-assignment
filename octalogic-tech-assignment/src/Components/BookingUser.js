@@ -24,8 +24,7 @@ function BookingUser() {
 
     
   const fetchVehicleTypes = async (wheels) => {
-    // const response = await fetch(`https://sukanta-octalogic-backen.onrender.com/vehicles/${wheels}`);
-    const response = await fetch(`http://localhost:8080/vehicles/wheels/${wheels}`);
+    const response = await fetch(`https://sukanta-octa-backendd.onrender.com/vehicles/wheels/${wheels}`);
     const data = await response.json();
     console.log(data)
     const uniqueTypes = [...new Set(data.map(vehicle => vehicle.typeOfVehicle))];
@@ -38,17 +37,12 @@ function BookingUser() {
   }
 
   const fetchVehicleModels = async (typeOfVehicle) => {
-    // const response = await fetch(`https://sukanta-octalogic-backen.onrender.com/vehicles/${typeOfVehicle}`);
-    const response = await fetch(`http://localhost:8080/vehicles/types/${typeOfVehicle}`);
-    
+    const response = await fetch(`https://sukanta-octa-backendd.onrender.com/vehicles/types/${typeOfVehicle}`); 
     const data = await response.json();
     setVehicleModels(data);
     
 
   };
-
-  // console.log("vehicleTypes",vehicleTypes)
-  // console.log("vehicleModels",vehicleModels)
 
   console.log("typeOfVehicle----",typeOfVehicle)
   console.log("wheels-------",wheels)
@@ -102,17 +96,10 @@ function BookingUser() {
     }
     setStep(step + 1);
   };
-  // const handleChangePopUpSuccess =()=>{
-  //   if (step === 5 && (startDate || endDate)) {
-  //     toast.success("You have Successfully Booked This Vehicles");
-  //     return;
-  //   }  
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const response = await fetch('https://sukanta-octalogic-backen.onrender.com/users/create', {     
-    const response = await fetch('http://localhost:8080/users/create/', {   
+    const response = await fetch('https://sukanta-octa-backendd.onrender.com/users/create', {        
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
