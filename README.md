@@ -47,6 +47,20 @@ You can use this app for a Vehicle Booking.
 
 ## Images of Project
 
+<h2>Booked Vehicles Page</h2>
+<img src="https://github.com/sukanta255/octalogic-tech-assignment/assets/101393346/84eb3d03-dd8e-4c41-9e7f-85e632323852"/>
+<h2>Vehicle Booking Form</h2>
+<h4>Step-1</h4>
+<img src="https://github.com/sukanta255/octalogic-tech-assignment/assets/101393346/9f3db8b8-5d47-4e80-b321-ea1b85069476"/>
+<h4>Step-2</h4>
+<img src="https://github.com/sukanta255/octalogic-tech-assignment/assets/101393346/e121665c-1e3a-41f6-bfd3-4f7e0024fcbe"/>
+<h4>Step-3</h4>
+<img src="https://github.com/sukanta255/octalogic-tech-assignment/assets/101393346/b884940e-7c32-48b3-b25e-796b610564b4"/>
+<h4>Step-4</h4>
+<img src="https://github.com/sukanta255/octalogic-tech-assignment/assets/101393346/215eeef4-c346-406e-8700-d99ece4c02b5"/>
+<h4>Step-5</h4>
+<img src="https://github.com/sukanta255/octalogic-tech-assignment/assets/101393346/fbbb1636-2e12-4066-ad17-613ce0cf71bc"/>
+
 
 
 
