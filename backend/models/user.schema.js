@@ -4,7 +4,7 @@ const { sequelize } = require("../config/dbConfig");
 const userSchema = sequelize.define('user',{
     firstName: {type : DataTypes.STRING, allowNull : false},
     lastName: {type : DataTypes.STRING, allowNull : false},
-    wheels: {type : DataTypes.INTEGER, allowNull : false},
+    wheels: {type : DataTypes.STRING, allowNull : false},
     typeOfVehicle: {type : DataTypes.STRING, allowNull : false},
     model: {type : DataTypes.STRING, allowNull : false},
     startDate:{type : DataTypes.DATE, allowNull : false},

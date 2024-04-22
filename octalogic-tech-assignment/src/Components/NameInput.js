@@ -1,38 +1,35 @@
-import "../style.css";
+
 import React from 'react';
-import TextField from '@mui/material/TextField';
+import "./Styles/nameinput.css";
 
-const NameInput = ({ firstName, lastName, onChange }) => {
-  const handleFirstNameChange = (e) => {
-    onChange('firstName', e.target.value);
-  };
-
-  const handleLastNameChange = (e) => {
-    onChange('lastName', e.target.value);
-  };
+function NameInput({ firstName, lastName, handleFirstNameChange,handleLastNameChange }){
 
   return (
-    <div>
-      <p>First, What's your name?</p>
-      <div style={{ display: "flex", flexDirection: "column", gap: "20px", padding: "20px" }}>
-        <div style={{ display: "flex", flexDirection: "column",fontWeight:600,color:"black"}}>
-          <label htmlFor="firstName">First Name</label>
-          <TextField
+    <div className="name-input">
+      <p className="firstname">First, What's your name?</p>
+      <div className="name-field">
+        <label>
+          First Name
+          <input
+            name="firstName"
+            type="text"
             id="firstName"
-            variant="outlined"
-            value={firstName}
+            required
             onChange={handleFirstNameChange}
+            value={firstName}
           />
-        </div>
-        <div style={{ display: "flex", flexDirection: "column",fontWeight:600,color:"black"}}>
-          <label htmlFor="lastName">Last Name</label>
-          <TextField
+        </label>
+        <label>
+          Last Name
+          <input
+            name="lastName"
+            type="text"
             id="lastName"
-            variant="outlined"
-            value={lastName}
+            required
             onChange={handleLastNameChange}
+            value={lastName}
           />
-        </div>
+        </label>
       </div>
     </div>
   );

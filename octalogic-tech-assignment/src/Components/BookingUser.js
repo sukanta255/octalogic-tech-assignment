@@ -1,0 +1,174 @@
+
+import React, { useState,useEffect } from 'react';
+import WheelSelector from './WheelSelector';
+import VehicleTypeSelector from './VehicleTypeSelector';
+import VehicleModelSelector from './VehicleModelSelector';
+import NameInput from './NameInput';
+import DateRangePicker from './DateRangePicker';
+import { Link } from 'react-router-dom';
+import axios from "axios";
+
+function BookingUser() {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [wheels, setWheels] = useState('');
+    const [typeOfVehicle, setTypeOfVehicle] = useState('');
+    const [vehicleTypes, setVehicleTypes] = useState([]);
+    const [model, setModel] = useState('');
+    const [vehicleModels, setVehicleModels] = useState([]);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [step, setStep] = useState(1);
+
+    useEffect(()=>{
+        fetchVehicle();
+        fetchVehicleModels();
+      },[])
+    
+  const fetchVehicle = async (wheels) => {
+    const response = await fetch(`https://sukanta-octalogic-backen.onrender.com/vehicles/${wheels}`);
+    
+    const data = await response.json();
+    console.log(data)
+    const uniqueTypes = [...new Set(data?.map(vehicle => vehicle.type))];
+    
+    const uniqueData = uniqueTypes.map(type => ({
+      type,
+    }));
+
+    setVehicleTypes(uniqueData);
+  }
+
+  const fetchVehicleModels = async (typeOfVehicle) => {
+    const response = await fetch(`https://sukanta-octalogic-backen.onrender.com/vehicles/${typeOfVehicle}`);
+    const data = await response.json();
+    setVehicleModels(data);
+    
+
+  };
+
+  console.log("vehicleTypes",vehicleTypes)
+  console.log("vehicleModels",vehicleModels)
+
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value);
+  };
+
+  const handleVehicleTypeChange = (e) => {
+    setTypeOfVehicle(e.target.value);
+  };
+
+  const handleVehicleModelChange = (e) => {
+    setModel(e.target.value);
+  };
+
+  const handleStartDateChange = (e) => {
+    setStartDate(e.target.value);
+  };
+
+  const handleEndDateChange = (e) => {
+    setEndDate(e.target.value);
+  };
+
+  const handleNext = () => {
+    if (step === 1 && (!firstName || !lastName)) {
+      alert('Please enter your first name and last name');
+      return;
+    }
+  
+    if (step === 2 && !wheels) {
+      alert('Please select the number of wheels');
+      return;
+    }
+  
+    if (step === 3 && !typeOfVehicle) {
+      alert('Please select a vehicle type');
+      return;
+    }  
+    setStep(step + 1);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch('https://sukanta-octalogic-backen.onrender.com/users/create', {     
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        firstName,lastName,wheels,typeOfVehicle,model,startDate,endDate
+      })
+      
+    });
+    console.log(response);
+    const data = await response.json();
+    if (response.ok) {
+      alert(data.message);
+    } else {
+      console.error(data);
+      alert('An error occurred');
+    }
+  };
+
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return <NameInput
+          firstName={firstName}
+          lastName={lastName}
+          handleFirstNameChange={handleFirstNameChange}
+          handleLastNameChange={handleLastNameChange}
+        />;
+      case 2:
+        return <WheelSelector
+          wheels={wheels}
+          fetchVehicle={fetchVehicle}
+          setWheels={setWheels}
+        />;
+      case 3:
+        return <VehicleTypeSelector
+          typeOfVehicle={typeOfVehicle}
+          setTypeOfVehicle={setTypeOfVehicle}
+          vehicleTypes={vehicleTypes}
+          handleVehicleTypeChange={handleVehicleTypeChange}
+          fetchVehicleModels={fetchVehicleModels}
+        />;
+      case 4:
+        return <VehicleModelSelector
+          model={model}
+          vehicleModels={vehicleModels}
+          handleVehicleModelChange={handleVehicleModelChange}
+        />;
+      case 5:
+        return <DateRangePicker
+          startDate={startDate}
+          endDate={endDate}
+          handleStartDateChange={handleStartDateChange}
+          handleEndDateChange={handleEndDateChange}
+        />
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} >
+      {renderStep()}
+      <div style={{ width: '30%', display: 'flex', justifyContent: 'space-between'}}>
+        {step !== 5 && <button type="button" onClick={handleNext}>Next</button>}
+        {step === 5 && <button type="submit">Submit</button>}
+      </div>
+
+      {step === 5 && <Link to="/users" style={{ textDecoration: 'none'}}>
+        <button type="button" style={{ backgroundColor: 'green', color: 'white' }}>Show Bookings User</button>
+      </Link>}
+    </form>    
+  );
+}
+
+export default BookingUser;
+

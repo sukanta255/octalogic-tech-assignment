@@ -1,0 +1,40 @@
+.bookings-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.user-booking {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: greenyellow;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    background-color: #f8f8f8;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #929292;
+}
+
+td button{
+    margin-top: 0px;
+}
+
+
+th {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+}
+
+tbody tr:hover {
+    color: rgb(201, 233, 19);
+}

@@ -4,7 +4,7 @@ const createUser= async(req,res) => {
     const { firstName,lastName,wheels,typeOfVehicle,model,startDate,endDate } = req.body;
     try{
         const isUserCreated = await userSchema.create({firstName,lastName,wheels,typeOfVehicle,model,startDate,endDate })
-        res.status(201).send({ error : false, items : isUserCreated });
+        res.status(201).send(isUserCreated );
     }catch(error){
         res.status(500).send({error : true, message: error.message });
     }
@@ -13,7 +13,7 @@ const createUser= async(req,res) => {
 const getAllUsers = async (req,res)=> {
     try{
         const allUsers = await userSchema.findAll();
-        res.status(201).send({ error : false, items : allUsers });
+        res.status(201).send(allUsers);
     }catch(error){
         res.status(500).send({error : true, message: error.message });
     }

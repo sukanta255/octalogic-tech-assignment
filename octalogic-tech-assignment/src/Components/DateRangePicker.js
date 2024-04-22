@@ -1,38 +1,28 @@
 import React, { useState } from 'react';
+import "./Styles/daterangepicker.css";
 
-const DateRangePicker = ({ startDate, endDate, onChange }) => {
-  const [selectedStartDate, setSelectedStartDate] = useState(startDate);
-  const [selectedEndDate, setSelectedEndDate] = useState(endDate);
-
-  const handleStartDateChange = (e) => {
-    const startDateValue = e.target.value;
-    setSelectedStartDate(startDateValue);
-    onChange(startDateValue, selectedEndDate);
-  };
-
-  const handleEndDateChange = (e) => {
-    const endDateValue = e.target.value;
-    setSelectedEndDate(endDateValue);
-    onChange(selectedStartDate, endDateValue);
-  };
+function DateRangePicker({ startDate, endDate, handleStartDateChange,handleEndDateChange }){
 
   return (
-    <div style={{display:"flex",flexDirection:"column",padding:"20px",gap:"5px"}}>
-      <label style={{padding:"10px"}}>
+    <div className='name-input'>
+      <p className="firstname">Please Booking Date</p>
+      <label style={{padding:"15px",fontSize:"20px"}}>
         Start Date:
         <input
-          style={{marginLeft:"10px"}}
           type="date"
-          value={selectedStartDate}
+          name = "startDate"
+          style={{marginLeft:"15px"}}
+          value={startDate}
           onChange={handleStartDateChange}
         />
       </label>
-      <label style={{padding:"10px"}}>
+      <label style={{padding:"15px",fontSize:"20px"}}>
         End Date:
         <input
-        style={{marginLeft:"10px"}}
           type="date"
-          value={selectedEndDate}
+          name="endDate"
+          style={{marginLeft:"15px"}}
+          value={endDate}
           onChange={handleEndDateChange}
         />
       </label>

@@ -1,31 +1,39 @@
 import React from 'react';
 
-const WheelSelector = ({ value, onChange }) => {
-  const handleInputChange = (e) => {
-    onChange('numberOfWheels', e.target.value);
+function WheelSelector({ wheels, fetchVehicle,setWheels}){
+  const handleWheelsInputChange = (selectedWheels) => {
+    wheels = selectedWheels;
+    setWheels(selectedWheels)
+    fetchVehicle(wheels)
   };
 
   return (
-    <div style={{display:"flex",flexDirection:"column",padding:"20px",gap:"10px"}}>
-      <label>
+    <div className='name-input'>
+      <div style={{display:"flex",flexDirection:"column",padding:"20px",gap:"10px"}}>
+      <p className="firstname">Please Select Wheels</p>
+      <label style={{fontSize:"24px"}}>
         <input
           type="radio"
+          name = "wheels"
           value="2"
-          checked={value === '2'}
-          onChange={handleInputChange}
+          
+          onChange={handleWheelsInputChange('2')}
         />
         2 Wheels
       </label>
-      <label>
+      <label style={{fontSize:"24px"}}>
         <input
           type="radio"
+          name="wheels"
           value="4"
-          checked={value === '4'}
-          onChange={handleInputChange}
+          onChange={handleWheelsInputChange('4')}
         />
         4 Wheels
       </label>
     </div>
+    </div>
+
+    
   );
 };
 

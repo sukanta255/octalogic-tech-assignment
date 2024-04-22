@@ -1,0 +1,28 @@
+.name-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f2f2f2;
+    border-radius: 8px;
+}
+.firstname {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2rem;
+}
+.name-field input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #e3e0e0;
+    width: 80%;
+}
+.name-field label {
+    display: block;
+    font-size: 22px;
+    margin-bottom: 11px;
+}
+
