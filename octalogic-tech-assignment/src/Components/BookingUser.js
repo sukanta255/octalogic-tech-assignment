@@ -6,7 +6,6 @@ import VehicleModelSelector from './VehicleModelSelector';
 import NameInput from './NameInput';
 import DateRangePicker from './DateRangePicker';
 import { Link } from 'react-router-dom';
-import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -44,8 +43,6 @@ function BookingUser() {
 
   };
 
-  console.log("typeOfVehicle----",typeOfVehicle)
-  console.log("wheels-------",wheels)
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
