@@ -17,7 +17,7 @@ function VehicleTypeSelector({ typeOfVehicle, vehicleTypes=[],setTypeOfVehicle,f
             type="radio"
             name="type"
             value={type.type}
-            onChange={handleVehicleTypeChange(type.type)}
+            onChange={()=>handleVehicleTypeChange(type.type)}
           />
           {type.type}
         </label>

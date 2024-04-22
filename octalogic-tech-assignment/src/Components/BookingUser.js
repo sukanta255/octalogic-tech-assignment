@@ -7,6 +7,8 @@ import NameInput from './NameInput';
 import DateRangePicker from './DateRangePicker';
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function BookingUser() {
     const [firstName, setFirstName] = useState('');
@@ -20,17 +22,13 @@ function BookingUser() {
     const [endDate, setEndDate] = useState('');
     const [step, setStep] = useState(1);
 
-    useEffect(()=>{
-        fetchVehicle();
-        fetchVehicleModels();
-      },[])
     
-  const fetchVehicle = async (wheels) => {
-    const response = await fetch(`https://sukanta-octalogic-backen.onrender.com/vehicles/${wheels}`);
-    
+  const fetchVehicleTypes = async (wheels) => {
+    // const response = await fetch(`https://sukanta-octalogic-backen.onrender.com/vehicles/${wheels}`);
+    const response = await fetch(`http://localhost:8080/vehicles/wheels/${wheels}`);
     const data = await response.json();
     console.log(data)
-    const uniqueTypes = [...new Set(data?.map(vehicle => vehicle.type))];
+    const uniqueTypes = [...new Set(data.map(vehicle => vehicle.typeOfVehicle))];
     
     const uniqueData = uniqueTypes.map(type => ({
       type,
@@ -40,15 +38,20 @@ function BookingUser() {
   }
 
   const fetchVehicleModels = async (typeOfVehicle) => {
-    const response = await fetch(`https://sukanta-octalogic-backen.onrender.com/vehicles/${typeOfVehicle}`);
+    // const response = await fetch(`https://sukanta-octalogic-backen.onrender.com/vehicles/${typeOfVehicle}`);
+    const response = await fetch(`http://localhost:8080/vehicles/types/${typeOfVehicle}`);
+    
     const data = await response.json();
     setVehicleModels(data);
     
 
   };
 
-  console.log("vehicleTypes",vehicleTypes)
-  console.log("vehicleModels",vehicleModels)
+  // console.log("vehicleTypes",vehicleTypes)
+  // console.log("vehicleModels",vehicleModels)
+
+  console.log("typeOfVehicle----",typeOfVehicle)
+  console.log("wheels-------",wheels)
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -74,27 +77,42 @@ function BookingUser() {
     setEndDate(e.target.value);
   };
 
-  const handleNext = () => {
+  const handleChangePopUp = () => {
     if (step === 1 && (!firstName || !lastName)) {
-      alert('Please enter your first name and last name');
+      toast.error('Please enter your first name and last name');
       return;
     }
   
     if (step === 2 && !wheels) {
-      alert('Please select the number of wheels');
+      toast.error('Please select the number of wheels');
       return;
     }
   
     if (step === 3 && !typeOfVehicle) {
-      alert('Please select a vehicle type');
+      toast.error('Please select a vehicle type');
       return;
     }  
+    if (step === 4 && !model) {
+      toast.error('Please select a vehicle model');
+      return;
+    } 
+    if (step === 5 && (!startDate || !endDate)) {
+      toast.error('Please select Startdate and Date');
+      return;
+    }
     setStep(step + 1);
   };
+  // const handleChangePopUpSuccess =()=>{
+  //   if (step === 5 && (startDate || endDate)) {
+  //     toast.success("You have Successfully Booked This Vehicles");
+  //     return;
+  //   }  
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('https://sukanta-octalogic-backen.onrender.com/users/create', {     
+    // const response = await fetch('https://sukanta-octalogic-backen.onrender.com/users/create', {     
+    const response = await fetch('http://localhost:8080/users/create/', {   
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -126,7 +144,7 @@ function BookingUser() {
       case 2:
         return <WheelSelector
           wheels={wheels}
-          fetchVehicle={fetchVehicle}
+          fetchVehicleTypes={fetchVehicleTypes}
           setWheels={setWheels}
         />;
       case 3:
@@ -159,8 +177,8 @@ function BookingUser() {
     <form onSubmit={handleSubmit} >
       {renderStep()}
       <div style={{ width: '30%', display: 'flex', justifyContent: 'space-between'}}>
-        {step !== 5 && <button type="button" onClick={handleNext}>Next</button>}
-        {step === 5 && <button type="submit">Submit</button>}
+        {step !== 5 && <button type="button" onClick={handleChangePopUp}>Next</button>}
+        {step === 5 && <button type="submit" >Submit</button>}
       </div>
 
       {step === 5 && <Link to="/users" style={{ textDecoration: 'none'}}>

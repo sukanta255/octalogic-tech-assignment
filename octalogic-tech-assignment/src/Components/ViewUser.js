@@ -10,8 +10,20 @@ function ViewUser(){
         fetchData();
     }, []);
 
+    const handleDelete = (id) => {
+        // axios.delete(`https://sukanta-octalogic-backen.onrender.com/users/${id}`)
+        axios.delete(`http://localhost:8080/users/delete/${id}`)
+            .then(() => {
+                fetchData();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
     const fetchData = () => {
-        axios.get("https://sukanta-octalogic-backen.onrender.com/users")     
+        // axios.get("https://sukanta-octalogic-backen.onrender.com/users")     
+        axios.get("http://localhost:8080/users")  
             .then((res) => {
                 setData(res.data);
             })
@@ -19,6 +31,7 @@ function ViewUser(){
                 console.log(err);
             });
     }
+   
     return (
         <div>
             <h1 className='user-booking'>USER BOOKINGS</h1>
@@ -47,12 +60,15 @@ function ViewUser(){
                             <td>{booking.model}</td>
                             <td>{new Date(booking.startDate).toLocaleDateString()}</td>
                             <td>{new Date(booking.endDate).toLocaleDateString()}</td>
+                            <td>
+                                <button onClick={() => handleDelete(booking.id)}>Delete</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
             <Link to="/">
-                <p style={{ color: "green" }}>Back To Home Page</p>
+                <p style={{ color: "green" }}>Back To Front Page</p>
             </Link>
         </div>
     );

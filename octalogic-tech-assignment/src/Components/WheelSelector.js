@@ -1,10 +1,11 @@
 import React from 'react';
 
-function WheelSelector({ wheels, fetchVehicle,setWheels}){
+function WheelSelector({ wheels, fetchVehicleTypes,setWheels}){
   const handleWheelsInputChange = (selectedWheels) => {
     wheels = selectedWheels;
     setWheels(selectedWheels)
-    fetchVehicle(wheels)
+    console.log("wheelsInput",wheels);
+    fetchVehicleTypes(wheels)
   };
 
   return (
@@ -17,7 +18,7 @@ function WheelSelector({ wheels, fetchVehicle,setWheels}){
           name = "wheels"
           value="2"
           
-          onChange={handleWheelsInputChange('2')}
+          onChange={()=>handleWheelsInputChange('2')}
         />
         2 Wheels
       </label>
@@ -26,7 +27,7 @@ function WheelSelector({ wheels, fetchVehicle,setWheels}){
           type="radio"
           name="wheels"
           value="4"
-          onChange={handleWheelsInputChange('4')}
+          onChange={()=>handleWheelsInputChange('4')}
         />
         4 Wheels
       </label>
